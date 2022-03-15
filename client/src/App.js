@@ -1,23 +1,23 @@
-import logo from './logo.svg';
+import CreateAuthor from './components/CreateAuthor';
+import Authors from './components/Authors';
 import './App.css';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import Update from './components/Update';
+import { useState } from 'react';
 
 function App() {
+  const [authors, setAuthors]= useState([]);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Favorite Authors</h1>
+      <BrowserRouter>
+        <Routes>
+          <Route  element={<Authors authors={authors} setAuthors={setAuthors}/>} path="/"/>
+          <Route element={<CreateAuthor/>} path="/new"/>
+          <Route element={<Update/>} path="/edit/:id"/>
+
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
