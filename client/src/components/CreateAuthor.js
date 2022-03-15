@@ -1,9 +1,11 @@
 import react, {useState, useEffect} from 'react';
 import AuthorForm from "./AuthorForm";
 import axios from 'axios';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 const CreateAuthor = (props) => {
+
+    let navigate = useNavigate();
     const {authors, setAuthors} = props;
 
     const createAuthor = (author) => {
@@ -11,6 +13,7 @@ const CreateAuthor = (props) => {
             .then(res => {
                 console.log(res.data);
                 setAuthors([...authors, res.data]);
+                navigate('/');
             })
             .catch(err => console.log(err));
     }

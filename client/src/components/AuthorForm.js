@@ -1,9 +1,12 @@
 import react, {useState, useEffect} from 'react';
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 
 const AuthorForm = (props) => {
-    const [name, setName] = useState('');
-    const {submitProp} = props
+    let navigate = useNavigate;
+    const {initialName, submitProp} = props
+    const [name, setName] = useState(initialName);
+  
 
     const submitHandler = (e) => {
         e.preventDefault();

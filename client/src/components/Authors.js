@@ -1,13 +1,16 @@
 import react, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import DeleteBtn from './DeleteBtn';
 
 const Authors = (props) => {
+    const [loaded, setLoaded] = useState(false);
     const {authors, setAuthors} = props;
     useEffect(() => {
         axios.get('http://localhost:8000/api/authors')
         .then((res) => {
             setAuthors(res.data);
+            setLoaded(true);
 
         })
         .catch((err) => {
@@ -27,13 +30,13 @@ const Authors = (props) => {
                     <td><h3>Actions available</h3></td>
                 </tr>
                 {
-                     authors.map((author, index) => {
+                     loaded && authors.map((author, index) => {
                         return(
                             <tr key={index}>
                                 <td>{author.name}</td>
                                 <td>
                                     <Link to={`/edit/${author._id}`}><button>Edit</button></Link>
-                                    <button>Delete</button>
+                                    <DeleteBtn authors={authors} setAuthors={setAuthors} id={author._id}/>
                                 </td>
                             </tr>
                         )
