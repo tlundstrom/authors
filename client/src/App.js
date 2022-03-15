@@ -12,9 +12,9 @@ function App() {
       <h1>Favorite Authors</h1>
       <BrowserRouter>
         <Routes>
-          <Route  element={<Authors authors={authors} setAuthors={setAuthors}/>} path="/"/>
-          <Route element={<CreateAuthor/>} path="/new"/>
-          <Route element={<Update/>} path="/edit/:id"/>
+          <Route  element={<Authors authors={authors} setAuthors={setAuthors}/>} path="/authors"/>
+          <Route element={<CreateAuthor authors={authors} setAuthors={setAuthors} />} path="/new"/>
+          <Route element={<Update authors={authors} setAuthors={setAuthors} />} path="/edit/:id"/>
 
         </Routes>
       </BrowserRouter>
