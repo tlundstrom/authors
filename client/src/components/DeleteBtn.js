@@ -21,7 +21,7 @@ const DeleteBtn = (props) => {
     }
 
     return(
-        <input onClick={deleteHandler}  type="button" value="Delete" />
+        <input className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-4 mt-4" onClick={deleteHandler}  type="button" value="Delete" />
     )
 }
 

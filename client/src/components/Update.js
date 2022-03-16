@@ -3,10 +3,10 @@ import AuthorForm from "./AuthorForm";
 import {Link, useNavigate, useParams} from 'react-router-dom';
 import axios from 'axios';
 
-const Update = () => {
+const Update = (props) => {
     
     let navigate = useNavigate();
-    const [author, setAuthor] = useState();
+    const {author, setAuthor} = props;
     const [loaded, setLoaded] = useState();
 
     const {id} = useParams();
@@ -32,7 +32,6 @@ const Update = () => {
     const updateAuthor = (author) => {
         axios.put(`http://localhost:8000/api/authors/${id}`, author)
             .then((res) => {
-                
                 navigate('/');
             })
             .catch((err) => console.log(err));
