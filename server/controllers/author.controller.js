@@ -8,7 +8,7 @@ module.exports = {
                 return res.json(author)
             })
             .catch(err => {
-                return res.json({ message: "Something went wrong...", error: err})
+                return res.status(400).json(err);
             });
     },
 
@@ -42,7 +42,7 @@ module.exports = {
                 return res.json(updatedAuthor)
             })
             .catch(err => {
-                return res.json({ message: "Something went wrong...", error: err})
+                return res.status(400).json(err);
             });
     },
 

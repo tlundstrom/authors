@@ -7,6 +7,7 @@ const CreateAuthor = (props) => {
 
     let navigate = useNavigate();
     const {authors, setAuthors} = props;
+    const [errors, setErrors] = useState({});
 
     const createAuthor = (author) => {
         axios.post('http://localhost:8000/api/authors', author)
@@ -15,14 +16,17 @@ const CreateAuthor = (props) => {
                 setAuthors([...authors, res.data]);
                 navigate('/');
             })
-            .catch(err => console.log(err));
+            .catch(err => {
+                console.log( err);
+                setErrors(err.response.data.errors);
+            });
     }
 
     return (
         <section>
             <p>Add a new author:</p>
             <Link to='/'>Home</Link>
-            <AuthorForm submitProp={createAuthor} />
+            <AuthorForm errors={errors} submitProp={createAuthor} />
         </section>
     )
 }

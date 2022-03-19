@@ -18,14 +18,14 @@ const Authors = (props) => {
         .catch((err) => {
             console.log(err);
         })
-    }, [])
+    }, [authors])
 
 
     return (
         <>
         <Link to="/new">Add an Author</Link>
         <p>We have quotes by:</p>
-        <table className='table-auto'>
+        <table style={{margin: "0 auto"}}className='table-auto'>
             <tbody>
                 <tr>
                     <td><h3>Author</h3></td>

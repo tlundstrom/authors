@@ -8,6 +8,7 @@ const Update = (props) => {
     let navigate = useNavigate();
     const {author, setAuthor} = props;
     const [loaded, setLoaded] = useState();
+    const [errors, setErrors] = useState({});
 
     const {id} = useParams();
 
@@ -25,6 +26,7 @@ const Update = (props) => {
             })
             .catch((err) => {
                 console.log(err);
+                setErrors(err.response.data.errors);
             })
             return() => isMounted = false;
     }, [])
@@ -34,8 +36,11 @@ const Update = (props) => {
             .then((res) => {
                 navigate('/');
             })
-            .catch((err) => console.log(err));
-            navigate('/');
+            .catch((err) => {
+                console.log(err);
+                setErrors(err.response.data.errors);
+            });
+
     }
 
     return (
@@ -44,7 +49,7 @@ const Update = (props) => {
         <section>
             <p>Edit this author:</p>
             <Link to='/'>Home</Link>
-            <AuthorForm initialName={author.name} submitProp={updateAuthor} />
+            <AuthorForm errors={errors} initialName={author.name} submitProp={updateAuthor} />
         </section>}
         </>
         
