@@ -25,8 +25,9 @@ const Update = (props) => {
                 }
             })
             .catch((err) => {
-                console.log(err);
-                setErrors(err.response.data.errors);
+                console.log(err.response.data);
+                setErrors(err.response.data);
+                setLoaded(false);
             })
             return() => isMounted = false;
     }, [])
@@ -37,7 +38,7 @@ const Update = (props) => {
                 navigate('/');
             })
             .catch((err) => {
-                console.log(err);
+
                 setErrors(err.response.data.errors);
             });
 
@@ -45,12 +46,17 @@ const Update = (props) => {
 
     return (
         <>
-        {loaded && 
+
         <section>
-            <p>Edit this author:</p>
             <Link to='/'>Home</Link>
-            <AuthorForm errors={errors} initialName={author.name} submitProp={updateAuthor} />
-        </section>}
+            {loaded && !errors.message?
+            <><p>Edit this author:</p><AuthorForm errors={errors} initialName={author.name} submitProp={updateAuthor} /></>
+            :<><p>{errors.message}</p><Link to='/new'><button>Add Author</button></Link></>
+            }
+        </section>
+
+
+
         </>
         
     )

@@ -15,7 +15,7 @@ const AuthorForm = (props) => {
     return (
         <form style={{margin:"10px"}} onSubmit={submitHandler}>
             <label className='font-bold'>Name:</label>
-            <input value={name} type="text" onChange={(e) => setName(e.target.value)}/><br/>
+            <input value={name || ""} type="text" onChange={(e) => setName(e.target.value)}/><br/>
             {
                 errors.name?
                 <p>{errors.name.message}</p>

@@ -7,6 +7,8 @@ import DeleteBtn from './DeleteBtn';
 const Authors = (props) => {
     const [loaded, setLoaded] = useState(false);
     const {authors, setAuthors} = props;
+    const [sorted, setSorted] = useState(false);
+    let newList = authors;
     
     useEffect(() => {
         axios.get('http://localhost:8000/api/authors')
@@ -18,8 +20,24 @@ const Authors = (props) => {
         .catch((err) => {
             console.log(err);
         })
-    }, [authors])
+    }, [])
 
+    const sort = (e) => {
+        sorted?
+        newList = authors.sort((a, z) => {
+            if(a.name < z.name) return -1
+            if(a.name > z.name) return 1
+            return 0;
+        })
+        :newList = authors.sort((a, z) => {
+            if(a.name < z.name) return 1
+            if(a.name > z.name) return -1
+            return 0;
+        }) 
+        setAuthors(newList);
+        setSorted(!sorted);
+        
+    }
 
     return (
         <>
@@ -28,7 +46,7 @@ const Authors = (props) => {
         <table style={{margin: "0 auto"}}className='table-auto'>
             <tbody>
                 <tr>
-                    <td><h3>Author</h3></td>
+                    <td><Link to="/"><h3 onClick={() => sort()}>Author</h3></Link></td>
                     <td><h3>Actions available</h3></td>
                 </tr>
                 {
